@@ -1,0 +1,7 @@
+name = "codelabs"
+license = "MIT"
+licenselink = "https://github.com/shprink/gohugo-theme-codelabs/blob/master/LICENSE"
+description = "Hugo theme to create codelabs easily"
+homepage = "https://codelabs.julienrenaux.fr"
+tags = ["blog", "codelabs", "code", "responsive", "workshop"]
+

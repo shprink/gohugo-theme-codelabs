@@ -1,0 +1,41 @@
+<div id="google-codelab-index-cards">
+    {{ $scratch := newScratch }}
+    {{ $list := (.Site.GetPage "section" "codelabs").Sections }}
+    {{ range $list }}
+    {{ $sortedPages := (sort .Pages ".Params.order" "asc")}}
+    {{ $firstStepLink := (index $sortedPages 0).Permalink }}
+    {{ $scratch.Set "timeTotal" 0 }}
+
+    {{range .Pages}}
+      {{ $scratch.Set "timeTotal" (add ($scratch.Get "timeTotal") .ReadingTime ) }}
+    {{end}}
+
+    {{ $category := .Params.category }}
+    <a class="card" href="{{ $firstStepLink }}">
+      <div class="card-header {{$category}}-bg">
+        <span class="category-icon {{$category}}-icon"></span>
+        <span class="card-duration">
+          {{ $scratch.Get "timeTotal" }} min
+        </span>
+      </div>
+      <div class="card-description">
+        {{ .Title }}
+      </div>
+      <div class="card-footer {{$category}}-footer">
+        <span class="card-start {{$category}}-start">Start</span>
+        <span class="card-updated">
+          {{- with .Params.author -}}
+          <div>
+            {{.}}
+          </div>
+          {{- end -}}
+          <div>
+            {{ .PublishDate.Format "Jan 2, 2006" }}
+          </div>
+        </span>
+      </div>
+
+    </a>
+    {{ end }}
+
+  </div>

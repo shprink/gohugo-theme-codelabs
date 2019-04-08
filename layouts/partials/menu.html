@@ -1,0 +1,24 @@
+{{ $url := .page.URL }}
+<div id="drawer">
+  <div class="steps">
+    <ol>
+      {{ $scratch := newScratch }}
+      {{ $scratch.Set "completed" true }}
+      {{ range $index, $element := .list }}
+        {{ range sort .Pages ".Params.order" "asc"}}
+          {{ if eq $url .URL }}
+              {{ $scratch.Set "completed" false }}
+          {{ end }}
+          {{ $isCompleted := $scratch.Get "completed" }}
+          <li {{ if eq $url .URL }}selected{{ end }} {{ if $isCompleted }}completed{{ end }}>
+            <a href="{{ .Permalink }}">
+              <span class="step">
+                <span>{{ .Title }}</span>
+              </span>
+            </a>
+          </li>
+        {{ end }}
+      {{ end }}
+    </ol>
+  </div>
+</div>

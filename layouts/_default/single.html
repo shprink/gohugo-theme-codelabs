@@ -1,0 +1,15 @@
+{{ define "main" }}
+
+
+<main class="app-container">
+  <article>
+
+    {{ partial "menu.html" . }}
+
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+  </article>
+</main>
+
+{{ end }}
