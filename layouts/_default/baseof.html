@@ -26,6 +26,7 @@
 
   {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
   <link rel="stylesheet" href="{{ $style.Permalink }}" />
+  {{ block "head" . }}{{ end }}
 </head>
 
 <body>
@@ -33,6 +34,7 @@
   {{ block "main" . }}
   {{ .Content }}
   {{ end }}
+  {{ block "scripts" . }}{{ end }}
 </body>
 
 </html>
