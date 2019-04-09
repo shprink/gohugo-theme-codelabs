@@ -1,17 +1,17 @@
 {{ define "main" }}
-{{ $list := (.Site.GetPage "section" "codelabs").Sections }}
+{{ $section := .CurrentSection }}
 <div id="google-codelab">
-  {{ partial "menu.html" (dict "list" $list "page" . ) }}
+  {{ partial "menu.html" . }}
   <div id="main">
     <div id="codelab-title">
       <div id="codelab-nav-buttons">
         <a href="{{ .Site.BaseURL }}" id="arrow-back">←</a>
       </div>
-      {{ with (index $list 0).Title }}
+      {{ with .CurrentSection.Title }}
       <h1>{{.}}</h1>
       {{end}}
 
-      {{ partial "time-remaining.html" (dict "list" $list "page" . ) }}
+      {{ partial "time-remaining.html" . }}
     </div>
     <div id="steps">
       <div id="google-codelab-step">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    {{ partial "controls.html" (dict "list" $list "page" . ) }}
+    {{ partial "controls.html" . }}
   </div>
 </div>
 {{ end }}

@@ -1,21 +1,20 @@
-{{ $site := .page.Site }}
-{{ $url := .page.URL }}
+{{ $site := .Site }}
+{{ $url := .Permalink }}
+
 {{ $scratch := newScratch }}
-{{ range .list }}
-{{ $len := (sub (len .Pages) 1)}}
-{{ $list := sort .Pages ".Params.order" "asc"}}
+{{ $len := (sub (len .CurrentSection.Pages) 1)}}
+{{ $list := sort .CurrentSection.Pages ".Params.order" "asc"}}
 {{ range $index, $element := $list}}
-{{ if eq $url .URL }}
+{{ if eq $url .Permalink }}
   {{ $scratch.Set "previousPage" (index $list (sub $index 1)) }}
   {{ $scratch.Set "nextPage" (index $list (add $index 1)) }}
 {{ end }}
 <!--  isFirst-->
-{{ if and (eq $url .URL) (eq $index 0)  }}{{ $scratch.Set "isFirst" true }}{{ end }}
+{{ if and (eq $url .Permalink) (eq $index 0)  }}{{ $scratch.Set "isFirst" true }}{{ end }}
 <!--  end isFirst -->
 <!--  isLast-->
-{{ if and (eq $url .URL) (eq $index $len)  }}{{ $scratch.Set "isLast" true }}{{ end }}
+{{ if and (eq $url .Permalink) (eq $index $len)  }}{{ $scratch.Set "isLast" true }}{{ end }}
 <!--  end isLast -->
-{{ end }}
 {{ end }}
 <div id="controls">
   <div id="fabs">

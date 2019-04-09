@@ -1,16 +1,16 @@
-{{ $site := .page.Site }}
-{{ $url := .page.URL }}
+{{ $site := .Site }}
+{{ $url := .Permalink }}
 
 {{ $scratch := newScratch }}
 {{ $scratch.Set "reachedCurrent" false }}
 {{ $scratch.Set "timeLeft" 0 }}
 
-{{ with (index .list 0).Pages }}
+{{ with .CurrentSection.Pages }}
 {{ $sortedPages := (sort . ".Params.order" "asc")}}
 
 {{range $index, $element := $sortedPages}}
 
-{{ if eq $url .URL }}{{ $scratch.Set "reachedCurrent" true }}{{ end }}
+{{ if eq $url .Permalink }}{{ $scratch.Set "reachedCurrent" true }}{{ end }}
 {{ if $scratch.Get "reachedCurrent" }}
 {{ $scratch.Set "timeLeft" (add ($scratch.Get "timeLeft") .ReadingTime ) }}
 {{ end }}
