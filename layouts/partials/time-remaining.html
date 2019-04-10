@@ -12,6 +12,8 @@
 
 {{ if eq $url .Permalink }}{{ $scratch.Set "reachedCurrent" true }}{{ end }}
 {{ if $scratch.Get "reachedCurrent" }}
+<!-- We can add extra time to do the exercise using .Params.time -->
+{{ if .Params.time }}{{ $scratch.Set "timeLeft" (add ($scratch.Get "timeLeft") .Params.time ) }}{{end}}
 {{ $scratch.Set "timeLeft" (add ($scratch.Get "timeLeft") .ReadingTime ) }}
 {{ end }}
 

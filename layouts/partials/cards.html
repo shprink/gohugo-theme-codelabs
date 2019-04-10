@@ -7,6 +7,8 @@
     {{ $scratch.Set "timeTotal" 0 }}
 
     {{range .Pages}}
+      <!-- We can add extra time to do the exercise using .Params.time -->
+      {{ if .Params.time }}{{ $scratch.Set "timeTotal" (add ($scratch.Get "timeTotal") .Params.time ) }}{{end}}
       {{ $scratch.Set "timeTotal" (add ($scratch.Get "timeTotal") .ReadingTime ) }}
     {{end}}
 
