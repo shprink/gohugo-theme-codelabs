@@ -12,6 +12,6 @@
 <header id="banner">
   <div class="site-width">
     <h2>{{ .Site.Params.title }}</h2>
-    <p>{{ .Site.Params.description }}</p>
+    <p>{{ .Site.Params.description | markdownify }}</p>
   </div>
 </header>
